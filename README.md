@@ -1,2 +1,2 @@
-# angular-helloworld-hero-edit
+# angular-helloworld
 Created with CodeSandbox
