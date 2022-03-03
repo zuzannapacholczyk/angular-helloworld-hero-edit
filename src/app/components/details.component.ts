@@ -11,19 +11,17 @@ import { HeroesService } from "../services/heroes.service";
 export class DetailsComponent implements OnInit {
   heroForm: FormGroup;
 
-  hero: Hero = { name: undefined, alterEgo: undefined, power: undefined };
-
   constructor(private heroesService: HeroesService) {}
 
   ngOnInit(): void {
     this.heroForm = new FormGroup({
-      name: new FormControl(this.hero.name, [Validators.required]),
-      alterEgo: new FormControl(this.hero.alterEgo),
-      power: new FormControl(this.hero.power)
+      name: new FormControl("", [Validators.required]),
+      alterEgo: new FormControl(""),
+      power: new FormControl("")
     });
   }
 
   onSubmit() {
-    this.heroesService.save(this.hero);
+    this.heroesService.save(this.heroForm.value);
   }
 }

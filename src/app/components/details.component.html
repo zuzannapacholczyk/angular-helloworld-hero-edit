@@ -2,7 +2,7 @@
   <div class="container">
     <h2>Hero Form</h2>
 
-    <form [formGroup]="heroForm">
+    <form [formGroup]="heroForm" (ngSubmit)="onSubmit()">
       <div class="form-group">
         <label for="name">Name</label>
         <input
