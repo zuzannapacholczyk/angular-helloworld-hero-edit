@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { FormControl, FormGroup, Validators } from "@angular/forms";
+import { ActivatedRoute, Params } from "@angular/router";
 import { Hero } from "../hero";
 import { HeroesService } from "../services/heroes.service";
 
@@ -10,14 +11,26 @@ import { HeroesService } from "../services/heroes.service";
 })
 export class DetailsComponent implements OnInit {
   heroForm: FormGroup;
+  hero: Hero = { name: "", alterEgo: "", power: "" };
 
-  constructor(private heroesService: HeroesService) {}
+  constructor(
+    private heroesService: HeroesService,
+    private route: ActivatedRoute
+  ) {}
 
   ngOnInit(): void {
+    this.route.params.subscribe((params: Params) => {
+      const heroName = params["hero?"];
+      console.log(heroName);
+      if (heroName) {
+        this.hero = this.heroesService.getHeroByName(heroName);
+      }
+    });
+
     this.heroForm = new FormGroup({
-      name: new FormControl("", [Validators.required]),
-      alterEgo: new FormControl(""),
-      power: new FormControl("")
+      name: new FormControl(this.hero.name, [Validators.required]),
+      alterEgo: new FormControl(this.hero.alterEgo),
+      power: new FormControl(this.hero.power)
     });
   }
 

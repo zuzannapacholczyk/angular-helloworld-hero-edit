@@ -7,7 +7,7 @@ import { DetailsComponent } from "./components/details.component";
 
 const routes: Routes = [
   { path: "overview", component: OverviewComponent },
-  { path: "details", component: DetailsComponent }
+  { path: "details/:hero?", component: DetailsComponent }
 ];
 
 @NgModule({
